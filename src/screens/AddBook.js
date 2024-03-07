@@ -25,10 +25,10 @@ const AddBook = () => {
   const navigation = useNavigation();
 
   const [title, setTitle] = useState('');
-  const onChangeTitle = (textValue) => setTitle(textValue.substr(0, 100));
+  const onChangeTitle = textValue => setTitle(textValue.substr(0, 100));
 
   const [description, setDescription] = useState('');
-  const onChangeDescription = (textValue) =>
+  const onChangeDescription = textValue =>
     setDescription(textValue.substr(0, 250));
 
   const [isbn, setIsbn] = useState('');
@@ -81,7 +81,7 @@ const AddBook = () => {
               placeholder="ISBN"
               placeholderTextColor={COLORS.placeholderText}
               style={{ ...styles.smallInput, ...styles.border }}
-              onChangeText={(value) => {
+              onChangeText={value => {
                 setIsbn(value);
               }}
               value={isbn}
@@ -111,8 +111,8 @@ const AddBook = () => {
             initialTags={tags}
             createTagOnReturn
             createTagOnString={[',']}
-            onChangeTags={(tags) => {
-              setTags(tags);
+            onChangeTags={t => {
+              setTags(t);
             }}
             inputStyle={styles.tagInputStyle}
             inputContainerStyle={styles.tagInputContainerStyle}

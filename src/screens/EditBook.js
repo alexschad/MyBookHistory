@@ -62,13 +62,13 @@ const EditBook = ({ route }) => {
   } = useTheme();
 
   const books = useContext(DataContext);
-  const book = books.find((e) => e.id === bookId);
+  const book = books.find(e => e.id === bookId);
 
   const [title, setTitle] = useState(book ? book.title : '');
-  const onChangeTitle = (textValue) => setTitle(textValue.substr(0, 100));
+  const onChangeTitle = textValue => setTitle(textValue.substr(0, 100));
 
   const [description, setDescription] = useState(book ? book.description : '');
-  const onChangeDescription = (textValue) =>
+  const onChangeDescription = textValue =>
     setDescription(textValue.substr(0, 250));
 
   const navigation = useNavigation();
@@ -109,7 +109,7 @@ const EditBook = ({ route }) => {
     }
   };
 
-  const editTags = (tags) => {
+  const editTags = tags => {
     dispatch({
       type: ACTIONS.EDIT_BOOK_TAGS,
       payload: { bookId, tags },

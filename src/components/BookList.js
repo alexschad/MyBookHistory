@@ -19,8 +19,8 @@ const BookList = () => {
 
   const filterBooks = () => {
     const filterdBooks = tagFilter
-      ? books.filter((l) => {
-          return l.tags?.findIndex((t) => t === tagFilter) > -1;
+      ? books.filter(l => {
+          return l.tags?.findIndex(t => t === tagFilter) > -1;
         })
       : books;
     if (sortOrder === 'created') {
@@ -112,7 +112,7 @@ const BookList = () => {
           <NoItems items={books} />
         ) : (
           <FlatList
-            keyExtractor={(item) => `item-${item.id}`}
+            keyExtractor={item => `item-${item.id}`}
             ItemSeparatorComponent={ItemSeparator}
             data={filterBooks()}
             renderItem={({ item, index }) => {
