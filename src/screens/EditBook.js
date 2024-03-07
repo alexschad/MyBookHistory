@@ -178,6 +178,7 @@ const EditBook = ({ route }) => {
               </TouchableOpacity>
             )}
           />
+          <Text style={styles.formLabel}>ISBN: {book.isbn}</Text>
         </ScrollView>
       </KeyboardAwareContainer>
     </SafeAreaView>
