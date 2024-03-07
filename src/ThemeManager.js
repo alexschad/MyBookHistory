@@ -30,7 +30,7 @@ export const useTheme = () => React.useContext(ManageThemeContext);
 export const ThemeManager = ({ children }) => {
   const [mode, setMode] = useState();
 
-  const changeMode = (newMode) => {
+  const changeMode = newMode => {
     setMode(newMode);
   };
 

@@ -133,6 +133,10 @@ const BookList = () => {
 };
 export default BookList;
 
-const ItemSeparator = () => (
-  <View style={{ height: 1, backgroundColor: '#DBDBE0' }} />
-);
+const ItemSeparator = () => {
+  const {
+    theme: { styles },
+  } = useTheme();
+
+  return <View style={styles.itemSeparator} />;
+};

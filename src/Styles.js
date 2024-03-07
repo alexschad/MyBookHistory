@@ -65,6 +65,10 @@ const COLORS = {
     light: '#46bbff',
     dark: '#44d85c',
   },
+  itemSeparator: {
+    light: '#DBDBE0',
+    dark: '#DBDBE0',
+  },
 };
 
 const getStyle = mode => {
@@ -562,6 +566,18 @@ const getStyle = mode => {
       color: COLORS.text[mode],
       fontSize: 17,
     },
+    itemSeparator: { height: 1, backgroundColor: COLORS.itemSeparator[mode] },
+    rightActions: {
+      width: 50,
+      flexDirection: 'row',
+    },
+    rightActionsAnimatedView: {
+      flex: 1,
+      backgroundColor: 'red',
+      justifyContent: 'center',
+      transform: [{ translateX: 0 }],
+    },
+    rightActionsRectButton: { backgroundColor: 'red', alignItems: 'center' },
   });
 };
 export const getTheme = mode => {

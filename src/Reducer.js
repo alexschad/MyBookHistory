@@ -40,7 +40,7 @@ const reducer = ({ save, books }, action) => {
     case ACTIONS.EDIT_BOOK_DATA:
       return {
         save: true,
-        books: books.map((l) => {
+        books: books.map(l => {
           if (l.id === action.payload.bookId) {
             return {
               ...l,
@@ -55,11 +55,11 @@ const reducer = ({ save, books }, action) => {
     case ACTIONS.DELETE_BOOK:
       return {
         save: true,
-        books: books.filter((l) => l.id !== action.payload.id),
+        books: books.filter(l => l.id !== action.payload.id),
       };
     // edit tags for a book
     case ACTIONS.EDIT_BOOK_TAGS: {
-      const bookIndex = books.findIndex((i) => i.id === action.payload.bookId);
+      const bookIndex = books.findIndex(i => i.id === action.payload.bookId);
       books[bookIndex].tags = action.payload.tags;
       return {
         save: true,

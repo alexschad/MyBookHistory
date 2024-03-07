@@ -31,23 +31,10 @@ const BookItem = ({ setTagFilter, book }) => {
 
   const renderRightActions = () => {
     return (
-      <View
-        style={{
-          width: 50,
-          flexDirection: 'row',
-        }}>
-        <Animated.View
-          style={{
-            flex: 1,
-            backgroundColor: 'red',
-            justifyContent: 'center',
-            transform: [{ translateX: 0 }],
-          }}>
+      <View style={styles.rightActions}>
+        <Animated.View style={styles.rightActionsAnimatedView}>
           <RectButton
-            style={[
-              styles.rightAction,
-              { backgroundColor: 'red', alignItems: 'center' },
-            ]}
+            style={[styles.rightAction, styles.rightActionsRectButton]}
             onPress={deleteBook}>
             <AntIcon name="delete" size={25} color={COLORS.text} />
           </RectButton>
@@ -56,7 +43,7 @@ const BookItem = ({ setTagFilter, book }) => {
     );
   };
 
-  const onTagPress = (tag) => {
+  const onTagPress = tag => {
     return () => {
       setTagFilter(tag);
     };

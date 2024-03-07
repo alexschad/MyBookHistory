@@ -26,7 +26,7 @@ export default function KeyboardAwareContainer({ children }) {
   }, [_handleKeyboardDidShow, _handleKeyboardDidHide]);
 
   const _handleKeyboardDidShow = useCallback(
-    (event) => {
+    event => {
       const { height: windowHeight } = Dimensions.get('window');
       const keyboardHeight = event.endCoordinates.height;
       const currentlyFocusedField = TextInputState.currentlyFocusedInput();
