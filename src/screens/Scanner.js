@@ -79,7 +79,8 @@ export default function Scanner() {
   useEffect(() => {
     (async () => {
       const status = await Camera.requestCameraPermission();
-      setHasPermission(status === 'authorized');
+      console.log('STATUS', status);
+      setHasPermission(status === 'granted');
     })();
   }, []);
 
@@ -138,9 +139,9 @@ export default function Scanner() {
     },
   });
 
-  if (device == null && hasPermission) {
+  if (device === null || !hasPermission) {
     return (
-      <View>
+      <View style={styles.body}>
         <Text>No Camera</Text>
       </View>
     );
