@@ -54,6 +54,8 @@ const DelHeaderLink = ({ navigation, book }) => {
   );
 };
 
+const headerRight = (n, b) => () => <DelHeaderLink navigation={n} book={b} />;
+
 const EditBook = ({ route }) => {
   const { bookId } = route.params;
   const dispatch = useContext(DispatchContext);
@@ -72,6 +74,7 @@ const EditBook = ({ route }) => {
     setDescription(textValue.substr(0, 250));
 
   const navigation = useNavigation();
+
   useEffect(() => {
     navigation.setOptions({
       headerTitle: () => {
@@ -81,7 +84,7 @@ const EditBook = ({ route }) => {
         }
         return header;
       },
-      headerRight: () => <DelHeaderLink navigation={navigation} book={book} />,
+      headerRight: headerRight(navigation, book),
     });
   }, [navigation, book, styles]);
 
