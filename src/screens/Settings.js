@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { SafeAreaView, Text, View, Linking, Switch } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../ThemeManager';
+import Import from '../components/Import';
+import Export from '../components/Export';
 import Icons from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import AntIcons from 'react-native-vector-icons/dist/AntDesign';
 
@@ -80,6 +82,32 @@ const Settings = () => {
             }>
             Feedback/Suggestions
           </Text>
+        </View>
+
+        <View style={styles.settingsRow}>
+          <Icons name="import" size={25} color={COLORS.buttonAction} />
+          <Import
+            renderButton={() => (
+              <Text style={styles.settingsText}>
+                Import Data from Clipboard
+              </Text>
+            )}
+          />
+        </View>
+        <View style={styles.settingsRow}>
+          <Icons
+            style={styles.paddingLeft3}
+            name="export"
+            size={25}
+            color={COLORS.buttonAction}
+          />
+          <Export
+            renderButton={() => (
+              <Text style={[styles.settingsText, styles.paddingLeft12]}>
+                Export Data to Clipboard
+              </Text>
+            )}
+          />
         </View>
       </View>
     </SafeAreaView>
