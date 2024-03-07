@@ -550,6 +550,15 @@ const getStyle = mode => {
       width: 60,
       height: 90,
     },
+    Logo: {
+      position: 'absolute',
+      width: 80,
+      height: 120,
+    },
+    LogoContainer: {
+      width: 80,
+      height: 120,
+    },
     mediumLogoIcon: {
       position: 'absolute',
       top: 15,

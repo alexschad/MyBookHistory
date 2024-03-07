@@ -9,6 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Image,
 } from 'react-native';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Tags from 'react-native-tags';
@@ -179,6 +180,15 @@ const EditBook = ({ route }) => {
             )}
           />
           <Text style={styles.formLabel}>ISBN: {book.isbn}</Text>
+          <Text style={styles.formLabel}>Cover Image:</Text>
+          <View style={styles.LogoContainer}>
+            <Image
+              style={styles.Logo}
+              source={{
+                uri: `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`,
+              }}
+            />
+          </View>
         </ScrollView>
       </KeyboardAwareContainer>
     </SafeAreaView>
