@@ -67,7 +67,6 @@ const headerRightComponent =
       />
     );
 export default function Scanner() {
-  const [hasPermission, setHasPermission] = useState(false);
   const [isbn, setISBN] = useState();
   const [bookData, setBookData] = useState();
   const [authors, setAuthors] = useState([]);
@@ -75,14 +74,6 @@ export default function Scanner() {
   const [showManualISBN, setShowManualISBN] = useState(false);
   const navigation = useNavigation();
   const device = useCameraDevice('back');
-
-  useEffect(() => {
-    (async () => {
-      const status = await Camera.requestCameraPermission();
-      console.log('STATUS', status);
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
 
   const {
     theme: { styles, COLORS },
@@ -139,7 +130,7 @@ export default function Scanner() {
     },
   });
 
-  if (device === null || !hasPermission) {
+  if (device === null) {
     return (
       <View style={styles.body}>
         <Text>No Camera</Text>
