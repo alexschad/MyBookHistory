@@ -9,6 +9,10 @@ const COLORS = {
     light: '#0d231f',
     dark: '#fff',
   },
+  textDark: {
+    light: '#000000',
+    dark: '#000000',
+  },
   reverseText: {
     light: '#fff',
     dark: '#fff',
@@ -202,6 +206,13 @@ const getStyle = mode => {
       padding: 10,
       marginHorizontal: 5,
       color: COLORS.text[mode],
+      fontSize: 18,
+    },
+    smallInputManualISBN: {
+      height: 42,
+      padding: 10,
+      marginHorizontal: 5,
+      color: COLORS.textDark[mode],
       fontSize: 18,
     },
     textAreaContainer: {

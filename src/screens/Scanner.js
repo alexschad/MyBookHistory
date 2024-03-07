@@ -152,9 +152,9 @@ export default function Scanner() {
           <TextInput
             placeholder="Enter ISBN"
             keyboardType="numeric"
-            placeholderTextColor={COLORS.placeholderText}
+            placeholderTextColor={COLORS.textDark}
             style={{
-              ...styles.smallInput,
+              ...styles.smallInputManualISBN,
               ...styles.border,
               ...{ flexGrow: 1 },
             }}
