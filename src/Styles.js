@@ -255,7 +255,7 @@ const getStyle = mode => {
     },
     tagText: {
       color: COLORS.reverseText[mode],
-      fontSize: 10,
+      fontSize: 13,
       fontWeight: 'bold',
     },
     tagDelete: {
