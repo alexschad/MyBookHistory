@@ -9,6 +9,7 @@ export const ACTIONS = {
   DELETE_BOOK: 'delete_book',
   EDIT_BOOK_TAGS: 'edit_book_tags',
   SET_BOOK_FILENAME: 'set_book_filename',
+  DELETE_BOOK_FILE: 'delete_book_file',
 };
 
 const reducer = ({ save, books }, action) => {
@@ -31,7 +32,7 @@ const reducer = ({ save, books }, action) => {
             title: action.payload.title,
             isbn: action.payload.isbn,
             description: action.payload.description,
-            filename: '',
+            filename: null,
             tags: action.payload.tags || [],
             created: Date.now(),
           },
@@ -56,7 +57,7 @@ const reducer = ({ save, books }, action) => {
       };
     // delete book
     case ACTIONS.DELETE_BOOK: {
-      const bookIndex = books.findIndex(i => i.id === action.payload.bookId);
+      const bookIndex = books.findIndex(i => i.id === action.payload.id);
       var path = `${RNFS.DocumentDirectoryPath}/${books[bookIndex].filename}`;
 
       RNFS.unlink(path)
@@ -95,6 +96,36 @@ const reducer = ({ save, books }, action) => {
           return b;
         }),
       };
+    case ACTIONS.DELETE_BOOK_FILE: {
+      const bookIndex = books.findIndex(i => i.id === action.payload.bookId);
+      const book = books[bookIndex];
+      const oldPath = `${RNFS.DocumentDirectoryPath}/${book.filename}`;
+      RNFS.exists(oldPath).then(exists => {
+        if (exists) {
+          RNFS.unlink(oldPath)
+            .then(() => {
+              console.log('FILE DELETED');
+            })
+            // `unlink` will throw an error, if the item to unlink does not exist
+            .catch(err => {
+              console.log(err.message);
+            });
+        }
+      });
+
+      return {
+        save: true,
+        books: books.map(b => {
+          if (b.id === action.payload.bookId) {
+            return {
+              ...b,
+              filename: null,
+            };
+          }
+          return b;
+        }),
+      };
+    }
     default:
       return { save, books };
   }
