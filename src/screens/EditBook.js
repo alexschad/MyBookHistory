@@ -68,6 +68,7 @@ const EditBook = ({ route }) => {
   const books = useContext(DataContext);
   const book = books.find(e => e.id === bookId);
 
+  const [fileExists, setFileExists] = useState(false);
   const [title, setTitle] = useState(book ? book.title : '');
   const onChangeTitle = textValue => setTitle(textValue.substr(0, 100));
 
@@ -121,12 +122,24 @@ const EditBook = ({ route }) => {
     });
   };
 
+  const removePhoto = () => {
+    dispatch({
+      type: ACTIONS.DELETE_BOOK_FILE,
+      payload: { bookId },
+    });
+  };
+
   if (!book) {
     return null;
   }
-  const path = `file://${RNFS.DocumentDirectoryPath}/${book.filename}`;
 
-  console.log(path);
+  const path = `file://${RNFS.DocumentDirectoryPath}/${book.filename}`;
+  RNFS.exists(path).then(exists => {
+    if (exists) {
+      setFileExists(true);
+    }
+  });
+
   return (
     <SafeAreaView style={styles.body} forceInset="top">
       <KeyboardAwareContainer>
@@ -186,24 +199,28 @@ const EditBook = ({ route }) => {
           <Text style={styles.formLabel}>Cover Image:</Text>
           <View style={styles.LogoContainer}>
             <Image
-              style={styles.Logo}
+              style={styles.Cover}
               source={{
                 uri: `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`,
               }}
             />
-            <Image
-              style={{
-                width: 80,
-                height: 120,
-                borderColor: 'blue',
-                borderWidth: 1,
-              }}
-              // style={[styles.Logo}
-              resizeMode="cover"
-              source={{
-                uri: path,
-              }}
-            />
+            {fileExists ? (
+              <>
+                <Image
+                  style={styles.CustomCover}
+                  source={{
+                    uri: path,
+                  }}
+                />
+
+                <Pressable
+                  onPress={removePhoto}
+                  title="X"
+                  style={styles.button}>
+                  <Text style={styles.buttonText}>X</Text>
+                </Pressable>
+              </>
+            ) : null}
             <Pressable
               onPress={() =>
                 navigation.navigate('TakePhoto', {

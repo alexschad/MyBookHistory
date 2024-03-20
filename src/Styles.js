@@ -555,6 +555,15 @@ const getStyle = mode => {
       width: 80,
       height: 120,
     },
+    Cover: {
+      position: 'absolute',
+      width: 80,
+      height: 120,
+    },
+    CustomCover: {
+      width: 80,
+      height: 120,
+    },
     LogoContainer: {
       width: 80,
       height: 320,
