@@ -14,6 +14,7 @@ import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
 import EditBook from './screens/EditBook';
 import Scanner from './screens/Scanner';
+import TakePhoto from './screens/TakePhoto';
 
 const Stack = createNativeStackNavigator();
 
@@ -76,6 +77,14 @@ const NavContainer = () => {
         <Stack.Screen
           name="Scanner"
           component={Scanner}
+          options={{
+            headerTitle: '',
+            headerBackTitle: 'Back',
+          }}
+        />
+        <Stack.Screen
+          name="TakePhoto"
+          component={TakePhoto}
           options={{
             headerTitle: '',
             headerBackTitle: 'Back',

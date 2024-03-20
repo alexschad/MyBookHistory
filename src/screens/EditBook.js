@@ -11,6 +11,7 @@ import {
   View,
   Image,
 } from 'react-native';
+import RNFS from 'react-native-fs';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Tags from 'react-native-tags';
 import AntIcon from 'react-native-vector-icons/dist/AntDesign';
@@ -123,7 +124,9 @@ const EditBook = ({ route }) => {
   if (!book) {
     return null;
   }
+  const path = `file://${RNFS.DocumentDirectoryPath}/${book.filename}`;
 
+  console.log(path);
   return (
     <SafeAreaView style={styles.body} forceInset="top">
       <KeyboardAwareContainer>
@@ -188,6 +191,29 @@ const EditBook = ({ route }) => {
                 uri: `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`,
               }}
             />
+            <Image
+              style={{
+                width: 80,
+                height: 120,
+                borderColor: 'blue',
+                borderWidth: 1,
+              }}
+              // style={[styles.Logo}
+              resizeMode="cover"
+              source={{
+                uri: path,
+              }}
+            />
+            <Pressable
+              onPress={() =>
+                navigation.navigate('TakePhoto', {
+                  bookId: book.id,
+                })
+              }
+              title="Take Photo"
+              style={styles.button}>
+              <Text style={styles.buttonText}>Take Photo</Text>
+            </Pressable>
           </View>
         </ScrollView>
       </KeyboardAwareContainer>

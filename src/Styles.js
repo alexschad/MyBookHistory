@@ -557,7 +557,9 @@ const getStyle = mode => {
     },
     LogoContainer: {
       width: 80,
-      height: 120,
+      height: 320,
+      // borderColor: 'white',
+      // borderWidth: 1,
     },
     mediumLogoIcon: {
       position: 'absolute',
