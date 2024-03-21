@@ -72,9 +72,11 @@ export default function TakePhoto({ route }) {
         isActive={true}
         photo={true}
       />
-      <Pressable onPress={takePhoto} title="Take Photo" style={styles.button}>
-        <Text style={styles.buttonText}>Take Photo</Text>
-      </Pressable>
+      <Pressable
+        onPress={takePhoto}
+        title="Take Photo"
+        style={styles.takePhotoButton}
+      />
     </>
   );
 }

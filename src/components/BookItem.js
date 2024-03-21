@@ -10,6 +10,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import AntIcon from 'react-native-vector-icons/dist/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
+import RNFS from 'react-native-fs';
 
 import { ACTIONS } from '../Reducer';
 import {
@@ -87,6 +88,11 @@ const BookItem = ({ setTagFilter, book }) => {
       }
     });
 
+  let uri = `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`;
+  if (book.filename !== null) {
+    uri = `file://${RNFS.DocumentDirectoryPath}/${book.filename}`;
+  }
+
   return (
     <Swipeable renderRightActions={renderRightActions}>
       <GestureDetector gesture={doubleTap}>
@@ -101,17 +107,13 @@ const BookItem = ({ setTagFilter, book }) => {
             <Image
               style={styles.mediumLogo}
               source={{
-                uri: `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`,
+                uri,
               }}
             />
           </View>
           <View style={styles.bookItemTextContainer}>
             <Text style={styles.bookItemText}>{book.title}</Text>
             <Text style={styles.bookItemTextSmall}>{book.description}</Text>
-            {/* <Text style={styles.bookItemTextSmall}>
-              {book.created &&
-                `${format(new Date(book.created), 'MM/dd/yyyy k:mm')}`}
-            </Text> */}
             {book.tags.length > 0 && (
               <View style={styles.bookListItemTags}>
                 {book.tags.map((tag, index) => (

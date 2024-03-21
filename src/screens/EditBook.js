@@ -127,6 +127,7 @@ const EditBook = ({ route }) => {
       type: ACTIONS.DELETE_BOOK_FILE,
       payload: { bookId },
     });
+    setFileExists(false);
   };
 
   if (!book) {
@@ -198,12 +199,6 @@ const EditBook = ({ route }) => {
           <Text style={styles.formLabel}>ISBN: {book.isbn}</Text>
           <Text style={styles.formLabel}>Cover Image:</Text>
           <View style={styles.LogoContainer}>
-            <Image
-              style={styles.Cover}
-              source={{
-                uri: `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`,
-              }}
-            />
             {fileExists ? (
               <>
                 <Image
@@ -216,11 +211,18 @@ const EditBook = ({ route }) => {
                 <Pressable
                   onPress={removePhoto}
                   title="X"
-                  style={styles.button}>
+                  style={[styles.button, styles.removePhoto]}>
                   <Text style={styles.buttonText}>X</Text>
                 </Pressable>
               </>
-            ) : null}
+            ) : (
+              <Image
+                style={styles.Cover}
+                source={{
+                  uri: `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`,
+                }}
+              />
+            )}
             <Pressable
               onPress={() =>
                 navigation.navigate('TakePhoto', {
@@ -228,7 +230,7 @@ const EditBook = ({ route }) => {
                 })
               }
               title="Take Photo"
-              style={styles.button}>
+              style={[styles.button, styles.takePhoto]}>
               <Text style={styles.buttonText}>Take Photo</Text>
             </Pressable>
           </View>
