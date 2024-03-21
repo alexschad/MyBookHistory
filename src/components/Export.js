@@ -6,9 +6,12 @@ import { DataContext } from '../Context';
 
 const Export = ({ renderButton }) => {
   const books = useContext(DataContext);
+  const booksWithoutFilename = books.map(b => {
+    return { ...b, filename: null };
+  });
 
   const copyToClipboard = () => {
-    Clipboard.setString(JSON.stringify(books));
+    Clipboard.setString(JSON.stringify(booksWithoutFilename));
     Alert.alert(
       'Data copied',
       'The book data has been copied to the clipboard.',

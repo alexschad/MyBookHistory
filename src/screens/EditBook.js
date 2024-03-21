@@ -11,6 +11,7 @@ import {
   View,
   Image,
 } from 'react-native';
+import RNFS from 'react-native-fs';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Tags from 'react-native-tags';
 import AntIcon from 'react-native-vector-icons/dist/AntDesign';
@@ -67,6 +68,7 @@ const EditBook = ({ route }) => {
   const books = useContext(DataContext);
   const book = books.find(e => e.id === bookId);
 
+  const [fileExists, setFileExists] = useState(false);
   const [title, setTitle] = useState(book ? book.title : '');
   const onChangeTitle = textValue => setTitle(textValue.substr(0, 100));
 
@@ -120,9 +122,24 @@ const EditBook = ({ route }) => {
     });
   };
 
+  const removePhoto = () => {
+    dispatch({
+      type: ACTIONS.DELETE_BOOK_FILE,
+      payload: { bookId },
+    });
+    setFileExists(false);
+  };
+
   if (!book) {
     return null;
   }
+
+  const path = `file://${RNFS.DocumentDirectoryPath}/${book.filename}`;
+  RNFS.exists(path).then(exists => {
+    if (exists) {
+      setFileExists(true);
+    }
+  });
 
   return (
     <SafeAreaView style={styles.body} forceInset="top">
@@ -182,12 +199,40 @@ const EditBook = ({ route }) => {
           <Text style={styles.formLabel}>ISBN: {book.isbn}</Text>
           <Text style={styles.formLabel}>Cover Image:</Text>
           <View style={styles.LogoContainer}>
-            <Image
-              style={styles.Logo}
-              source={{
-                uri: `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`,
-              }}
-            />
+            {fileExists ? (
+              <>
+                <Image
+                  style={styles.CustomCover}
+                  source={{
+                    uri: path,
+                  }}
+                />
+
+                <Pressable
+                  onPress={removePhoto}
+                  title="X"
+                  style={[styles.button, styles.removePhoto]}>
+                  <Text style={styles.buttonText}>X</Text>
+                </Pressable>
+              </>
+            ) : (
+              <Image
+                style={styles.Cover}
+                source={{
+                  uri: `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`,
+                }}
+              />
+            )}
+            <Pressable
+              onPress={() =>
+                navigation.navigate('TakePhoto', {
+                  bookId: book.id,
+                })
+              }
+              title="Take Photo"
+              style={[styles.button, styles.takePhoto]}>
+              <Text style={styles.buttonText}>Take Photo</Text>
+            </Pressable>
           </View>
         </ScrollView>
       </KeyboardAwareContainer>

@@ -555,9 +555,21 @@ const getStyle = mode => {
       width: 80,
       height: 120,
     },
-    LogoContainer: {
+    Cover: {
       width: 80,
       height: 120,
+    },
+    CustomCover: {
+      width: 80,
+      height: 120,
+    },
+    LogoContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      // width: 80,
+      height: 120,
+      // borderColor: 'white',
+      // borderWidth: 1,
     },
     mediumLogoIcon: {
       position: 'absolute',
@@ -598,6 +610,19 @@ const getStyle = mode => {
       transform: [{ translateX: 0 }],
     },
     rightActionsRectButton: { backgroundColor: 'red', alignItems: 'center' },
+    removePhoto: { position: 'absolute', top: -10, left: 90 },
+    takePhoto: { position: 'absolute', top: 30, left: 90 },
+    takePhotoButton: {
+      position: 'absolute',
+      bottom: 30,
+      left: wp('50%') - 40,
+      width: 80,
+      height: 80,
+      backgroundColor: 'red',
+      borderRadius: 50,
+      borderWidth: 2,
+      borderColor: 'white',
+    },
   });
 };
 export const getTheme = mode => {
