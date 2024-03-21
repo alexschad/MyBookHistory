@@ -566,10 +566,7 @@ const getStyle = mode => {
     LogoContainer: {
       display: 'flex',
       flexDirection: 'row',
-      // width: 80,
       height: 120,
-      // borderColor: 'white',
-      // borderWidth: 1,
     },
     mediumLogoIcon: {
       position: 'absolute',
