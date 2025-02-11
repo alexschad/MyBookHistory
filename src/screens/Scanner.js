@@ -167,7 +167,11 @@ export default function Scanner() {
         </View>
       )}
       <CameraOverlay
-        {...bookData}
+        title={bookData?.title}
+        full_title={bookData?.full_title}
+        description={bookData?.description}
+        isbn_13={bookData?.isbn_13}
+        error={bookData?.error}
         setISBN={setISBN}
         setBookData={setBookData}
         authors={authors}
